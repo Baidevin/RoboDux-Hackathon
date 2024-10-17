@@ -22,26 +22,30 @@ void Stepper::step(int steps)
     {
         setDir(REV);
     }
+    else
+    {
+        setDir(FWD);
+    }
 
-    for (int i = 0; i < steps; i++) 
+    for (int i = 0; i < abs(steps); i++) 
     {
         digitalWrite(stepPin, HIGH);
-        delayMicroseconds(500);
+        delayMicroseconds(DELAY);
         digitalWrite(stepPin, LOW);
-        delayMicroseconds(500);
+        delayMicroseconds(DELAY);
     }
 }
 
 void Stepper::step()
 {
     digitalWrite(stepPin, HIGH);
-    delayMicroseconds(500);
+    delayMicroseconds(DELAY);
     digitalWrite(stepPin, LOW);
 }
 
 void Stepper::setDir(int dir)
 {
-    if (dir < -1 || dir > 1)
+    if (dir < 0 || dir > 1)
     {
         return;
     }
