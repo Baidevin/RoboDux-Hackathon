@@ -13,12 +13,17 @@ Robot::Robot()
     }
 }
 
-void Robot::drawLine(int x, int y)
+void Robot::drawLine(double x, double y)
 {
-    float steps = sqrt(x * x + y * y);
-    float dx = (x / steps) * STEPS2MM;
-    float dy = (y / steps) * STEPS2MM;
+    Serial.println("Drawing Line");
+    Serial.println(x);
+    Serial.println(y);
+    double steps = sqrt(x * x + y * y);
+    double dx = (x / steps) * STEPS2MM;
+    double dy = (y / steps) * STEPS2MM;
 
+    Serial.print("Steps: ");
+    Serial.println(steps);
     int motorSpeeds[4];
 
     motorSpeeds[0] = (int) (dx - dy);
@@ -40,10 +45,10 @@ void Robot::drawLine(int x, int y)
         }
     }
 
-    for (int i = 0; i < 4; i++)
-    {
-        steppers[i].sleep();
-    }
+    // for (int i = 0; i < 4; i++)
+    // {
+    //     steppers[i].sleep();
+    // }
 }
 
 void Robot::penup()
@@ -69,6 +74,14 @@ void Robot::forward(int steps)
         {
             stepper.step();
         }
+    }
+}
+
+void Robot::stop()
+{
+    for (auto stepper : steppers)
+    {
+        stepper.sleep();
     }
 }
 

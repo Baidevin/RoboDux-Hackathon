@@ -27,7 +27,8 @@ if __name__ == "__main__":
                 isMoving = True
         else:
             if(len(curpath) > 0):
-                for point in curpath:
+                for i in range(0, len(curpath), 5):
+                    point = curpath[i]
                     while True:
                         mobilityHandler.goto(point)
                         if mobilityHandler.arrived():
